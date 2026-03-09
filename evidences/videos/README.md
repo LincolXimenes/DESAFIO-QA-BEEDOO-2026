@@ -1,0 +1,1 @@
+Esta pasta armazena gravações das execuções dos testes.

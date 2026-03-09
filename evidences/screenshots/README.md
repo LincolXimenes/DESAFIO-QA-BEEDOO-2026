@@ -1,0 +1,1 @@
+Esta pasta armazena prints das execuções dos testes.
