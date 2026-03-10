@@ -107,7 +107,7 @@ A aplicação apresenta um sistema completo de gerenciamento de cursos com funci
 **Formato:** Planilha do Google Sheets (conforme especificado)
 
 **Status:** ✅ **CONCLUÍDA**
-- **Link da Planilha:** [📊 Casos de Teste - Google Sheets](SEU_LINK_AQUI)
+- **Link da Planilha:** [📊 Casos de Teste - Google Sheets](https://docs.google.com/spreadsheets/d/1zQcBMSFAtPdiuUIDFZfsb-U0uV1uEqdTVTCtIC4M8os/edit?usp=sharing)
 - **22 casos de teste** executados e documentados
 - **Métricas automáticas:** Taxa de sucesso: 18%, Taxa de defeitos: 82%
 - Resultados completos com correlação para bugs identificados  
@@ -125,7 +125,7 @@ A aplicação apresenta um sistema completo de gerenciamento de cursos com funci
 ### 3. Relatório de Bugs Encontrados ✅
 **Localização:** [bug-reports/bugs.md](bug-reports/bugs.md)
 
-**14 bugs documentados incluindo:**
+**24 bugs documentados incluindo:**
 - ✅ Título do bug
 - ✅ Passos para reproduzir
 - ✅ Resultado atual
