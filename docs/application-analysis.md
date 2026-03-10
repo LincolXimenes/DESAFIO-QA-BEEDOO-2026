@@ -73,33 +73,259 @@ A aplicação tem como objetivo permitir o cadastro e gerenciamento de cursos de
 
 ## ⚠️ Pontos Críticos Identificados
 
-### 1. Estado Vazio da Lista
-**Problema:** Ao acessar "Listar cursos" sem ter cursos cadastrados, nenhuma informação é exibida.
+### 1. Validações de Formulário (CRÍTICO)
+**Problema:** Sistema permite salvar cursos sem validação adequada dos dados.
 
-**Impacto:** Pode gerar confusão no usuário sobre se a funcionalidade está funcionando.
+**Detalhes identificados:**
+- Campos obrigatórios não são validados
+- Aceita valores inválidos em todos os campos
+- Permite datas inconsistentes (fim antes do início)
+- Não valida formato de URLs/links
+- Ausente limitação de caracteres
 
-**Sugestão:** Implementar mensagem de estado vazio: "Nenhum curso cadastrado. Que tal adicionar o primeiro?"
+**Impacto:** Compromete integridade dos dados e experiência do usuário.
 
-### 2. Validações de Formulário
-**Pontos a verificar:**
-- Campos obrigatórios estão sendo validados?
-- Limites de caracteres estão definidos?
-- Formato de carga horária aceita apenas números?
-- Caracteres especiais são tratados adequadamente?
+### 2. Funcionalidades de Gestão Incompletas
+**Problemas identificados:**
+- **Ausência de edição:** Não é possível editar cursos cadastrados
+- **Exclusão não funcional:** Botão excluir não remove curso da listagem
+- **Duplicação permitida:** É possível cadastrar cursos com mesmo nome
 
-### 3. Responsividade
-**Pontos a verificar:**
-- Comportamento em dispositivos móveis
-- Adaptação de formulários em telas menores
-- Usabilidade dos botões em touch screens
+**Impacto:** Limita severamente a usabilidade para gestão de cursos.
 
-### 4. Performance e Carregamento
-**Pontos a verificar:**
-- Tempo de resposta do cadastro
-- Comportamento com muitos cursos na lista
-- Loading states durante operações
+### 3. Problemas de Exibição na Listagem (CONFIRMADO VISUALMENTE)
+**Problemas identificados e confirmados:**
+- **Informações importantes ocultas:** ✅ **CONFIRMADO** - Endereço e link NÃO são exibidos
+- **Layout inconsistente:** ✅ **CONFIRMADO** - Cards com alturas muito diferentes
+- **Quebra de layout:** ✅ **CONFIRMADO** - Textos longos deformam cards
+- **Ausência de paginação:** 🆕 **NOVO** - Todos os cursos em uma única página
+- **Responsividade:** ✅ **FUNCIONAL** - Desktop 2 colunas, Mobile 1 coluna
+- **Elementos não clicáveis:** ✅ **CONFIRMADO** - Apenas botão excluir é interativo
 
-## 🧪 Cenários de Teste Priorizados
+**Detalhes observados nas imagens:**
+- **Desktop (1680px):** Grid de 2 colunas funcionando bem
+- **Mobile (375px):** Cards empilhados verticalmente (1 coluna)
+- **Textos longos:** Causam cards com alturas desproporcionais  
+- **Sem limitação:** Títulos e descrições podem ter tamanho excessivo
+- **Sem paginação:** Lista cresce infinitamente sem controle
+- **Informações ausentes:** Apenas tipo (badge) é mostrado, endereço/link ficam ocultos
+
+**Impacto:** Layout inconsistente, informações críticas ausentes e possível problema de performance.
+- **Ausência de paginação:** 🆕 **NOVO** - Todos os cursos em uma única página
+- **Responsividade:** ✅ **FUNCIONAL** - Desktop 2 colunas, Mobile 1 coluna
+
+**Detalhes observados nas imagens:**
+- **Desktop (1680px):** Grid de 2 colunas funcionando bem
+- **Mobile (375px):** Cards empilhados verticalmente (1 coluna)
+- **Textos longos:** Causam cards com alturas desproporcionais
+- **Sem limitação:** Títulos e descrições podem ter tamanho excessivo
+- **Sem paginação:** Lista cresce infinitamente sem controle
+
+**Impacto:** Layout inconsistente e possível problema de performance com muitos cursos.
+
+### 4. Integridade de Dados
+**Problemas identificados:**
+- Dados inconsistentes são aceitos pelo sistema
+- Falta de validação de unicidade
+- Campos condicionais não são obrigatórios quando deveriam
+
+**Impacto:** Compromete confiabilidade do sistema.
+
+### 5. Ausência de Paginação (🆕 NOVO - Identificado visualmente)
+**Problema:** Sistema não possui paginação para listagem de cursos.
+
+**Detalhes observados:**
+- Todos os cursos são exibidos em uma única página
+- Lista pode crescer indefinidamente
+- Sem controle de quantos itens exibir por página
+- Possibilidade de impacto na performance com muitos cursos
+
+**Impacto:** Performance e usabilidade comprometidas com crescimento da base de dados.
+
+### 5. Funcionalidades Essenciais Ausentes (🆕 IDENTIFICADAS)
+**Problemas:** Sistema carece de funcionalidades básicas de usabilidade.
+
+**Funcionalidades ausentes identificadas:**
+- **🔍 Busca/Filtro:** Impossibilidade de localizar curso específico
+- **📋 Ordenação:** Sem critérios de organização da listagem
+- **❓ Confirmação:** Exclusão sem modal de confirmação
+- **⏳ Loading states:** Sem feedback durante operações
+- **📋 Detalhes:** Não há visualização expandida de cursos
+- **🧗 Breadcrumbs:** Ausência de indicação de navegação
+
+**Impacto:** Funcionalidades básicas esperadas pelo usuário estão ausentes.
+
+**Detalhes por funcionalidade:**
+- **Busca (BUG016):** Com 10+ cursos, localizar um específico se torna difícil
+- **Ordenação (BUG017):** Lista sem ordem lógica prejudica navegação
+- **Confirmação (BUG018):** Risco de exclusão acidental
+- **Estados de loading (BUG019):** Usuário não sabe se ação está processando
+
+## 📊 Observações Visuais Confirmadas
+
+### Layout da Listagem (Evidência Visual)
+
+**✅ Informações corretamente exibidas:**
+- Nome do curso (com destaque visual)
+- Tipo do curso (Badge "Presencial" ou "Online" colorido)
+- Descrição completa do curso
+- Nome do instrutor
+- Data de início e data de fim
+- Número de vagas disponíveis
+- Imagem de capa (quando fornecida)
+- Botão "Excluir Curso" (vermelho, visível mas não funcional)
+
+**❌ Informações importantes AUSENTES:**
+- **Endereço completo** para cursos presenciais (apenas tipo é mostrado)
+- **Link de inscrição** para cursos online (apenas tipo é mostrado)
+- **Campos não clicáveis** - Nenhuma interação além do botão excluir
+- **Detalhes adicionais** que poderiam ser úteis ao usuário
+
+**❌ Problemas visuais confirmados:**
+- Cards com alturas muito diferentes (variação de 200-600px aproximadamente)
+- Textos longos em títulos e descrições quebram layout
+- Ausência de truncamento de texto ("...")
+- Falta de altura fixa ou mínima para os cards
+- Espaçamento irregular entre elementos
+- **Informações críticas ocultas** comprometem utilidade da listagem
+
+**✅ Responsividade funcional:**
+- **Desktop (1680px):** Grid 2 colunas, cards lado a lado
+- **Mobile (375px):** Grid 1 coluna, cards empilhados
+- Transição responsiva adequada
+- Elementos se reorganizam corretamente
+
+### Impacto Visual na Experiência
+- **Positivo:** Informações são exibidas completamente
+- **Negativo:** Layout desorganizado prejudica profissionalismo
+- **Crítico:** Falta de paginação pode causar problemas de performance
+
+## 🧐 Raciocínio Analítico e Decisões Tomadas
+
+### Abordagem de Teste Utilizada
+
+#### 1. Teste Exploratório Estruturado
+**Decisão:** Iniciar com exploração livre da aplicação antes de criar casos de teste estruturados.
+
+**Raciocínio:** 
+- Permite descobrir funcionalidades não documentadas
+- Identifica comportamentos inesperados rapidamente
+- Fornece visão holística do sistema antes da análise detalhada
+
+**Resultado:** Identificação de 14 bugs críticos que não seriam detectados apenas com testes baseados em requisitos.
+
+#### 2. Priorização Baseada em Risco
+**Decisão:** Focar primeiro em funcionalidades core (cadastro e listagem) antes de aspectos visuais.
+
+**Raciocínio:**
+- Funcionalidades básicas devem estar sólidas antes de refinar detalhes
+- Bugs de validação têm impacto direto na integridade dos dados
+- Problemas de usabilidade, embora importantes, não comprometem funcionalidade
+
+**Resultado:** Identificação rápida de problemas estruturais graves.
+
+#### 3. Análise de Fluxos Completos
+**Decisão:** Testar jornadas completas do usuário, não apenas funcionalidades isoladas.
+
+**Raciocínio:**
+- Usuários reais executam fluxos completos
+- Problemas de integração aparecem na jornada completa
+- Identifica pontos de fricção na experiência
+
+**Resultado:** Descoberta de que exclusão não funciona e ausência de edição limita usabilidade.
+
+### Metodologia de Investigação de Defeitos
+
+#### 1. Classificação Imediata por Impacto
+**Processo:**
+- **Crítica:** Funcionalidade não funciona (ex: exclusão)
+- **Alta:** Compromete integridade (ex: falta de validação)
+- **Média:** Afeta usabilidade (ex: duplicação permitida)
+- **Baixa:** Problemas visuais (ex: alinhamento)
+
+#### 2. Documentação Estruturada
+**Decisão:** Padronizar formato de registro de bugs para facilitar correção.
+
+**Elementos obrigatórios:**
+- Passos detalhados para reprodução
+- Resultado atual vs esperado
+- Classificação de severidade e prioridade
+- Sugestões de correção
+
+#### 3. Análise de Causa Raiz
+**Abordagem:** Para cada bug, investigar se é sintoma de problema maior.
+
+**Exemplo:** Falta de validação em um campo indica provavel ausência de validação em todos os campos.
+
+### Identificação de Vulnerabilidades
+
+#### 1. Segurança de Dados
+**Vulnerabilidade identificada:** Sistema aceita qualquer tipo de dado sem validação.
+
+**Riscos:**
+- Injeção de scripts maliciosos
+- Corrupção de dados
+- Ataques de negativação de serviço com dados excessivos
+
+#### 2. Integridade do Sistema
+**Vulnerabilidade:** Ausencia de validações permite estados inconsistentes.
+
+**Cenarios de risco:**
+- Datas inválidas podem causar erros em sistemas integrados
+- Links quebrados prejudicam experiência
+- Dados duplicados dificultam manutenção
+
+#### 3. Usabilidade como Segurança
+**Vulnerabilidade:** Funcionalidades não funcionais podem causar perda de dados.
+
+**Exemplo:** Usuário tenta excluir curso, pensa que foi excluído, mas continua ativo.
+
+### Tomada de Decisão em Cenários Reais
+
+#### Cenário 1: Priorização de Bugs
+**Situação:** Múltiplos bugs identificados, recursos limitados para correção.
+
+**Decisão tomada:**
+1. **Primeiro:** Corrigir exclusão não funcional (bloqueia funcionalidade)
+2. **Segundo:** Implementar validações básicas (integridade)
+3. **Terceiro:** Corrigir exibição de dados (usabilidade)
+4. **Último:** Ajustes visuais (polêmento)
+
+**Justificativa:** Impacto no usuário vs esforço de desenvolvimento.
+
+#### Cenário 2: Comunicação de Riscos
+**Situação:** Sistema em produção com bugs críticos identificados.
+
+**Decisão de comunicação:**
+- **Stakeholders técnicos:** Detalhes técnicos e passos para reprodução
+- **Gestão:** Impacto no negócio e cronograma de correção
+- **Usuários finais:** Orientações para evitar problemas até correção
+
+### Forma de Investigação de Defeitos
+
+#### Metodologia de 5W2H Aplicada
+
+Para cada defeito identificado:
+
+**What (O quê)?** Descrição clara do problema
+**When (Último)?** Em que momento ocorre
+**Where (Onde)?** Em qual parte do sistema
+**Who (Quem)?** Que tipo de usuário é afetado
+**Why (Por quê)?** Provável causa raiz
+**How (Como)?** Passos para reproduzir
+**How much (Quanto)?** Impacto estimado
+
+#### Exemplo Prático - BUG012 (Exclusão não funciona)
+
+**What:** Botão de exclusão não remove curso da listagem
+**When:** Sempre que usuário clica em "Excluir curso"
+**Where:** Na listagem de cursos, ação de exclusão
+**Who:** Qualquer usuário tentando remover um curso
+**Why:** Provável problema na implementação do backend ou desconexão frontend-backend
+**How:** Cadastrar curso → Tentar excluir → Observar que permanece na lista
+**How much:** Alto - Funcionalidade crítica não funcional
+
+## 🎓 Cenarios de Teste Priorizados
 
 ### Alta Prioridade
 1. **Cadastro com dados válidos** - Funcionalidade core
