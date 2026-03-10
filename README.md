@@ -107,9 +107,11 @@ A aplicação apresenta um sistema completo de gerenciamento de cursos com funci
 **Formato:** Planilha do Google Sheets (conforme especificado)
 
 **Status:** ✅ **CONCLUÍDA**
+- **Link da Planilha:** [📊 Casos de Teste - Google Sheets](SEU_LINK_AQUI)
 - **22 casos de teste** executados e documentados
+- **Métricas automáticas:** Taxa de sucesso: 18%, Taxa de defeitos: 82%
 - Resultados completos com correlação para bugs identificados  
-- Status de execução: 4 Passou, 15 Falhou, 3 Parcial
+- Status de execução: 4 Passou, 18 Falharam, 3 Parcial
 
 **Conteúdo da planilha:**
 - ID do caso de teste

@@ -5,9 +5,9 @@ Este documento contém todos os casos de teste elaborados para a aplicação de 
 ## 📊 Planilha de Casos de Teste (Google Sheets)
 
 **Status:** ✅ **CONCLUÍDA**  
-**Link:** [Planilha Google Sheets - Casos de Teste](https://docs.google.com/spreadsheets/d/[ID_DA_PLANILHA])
+**Link:** [📊 Planilha Google Sheets - Casos de Teste](https://docs.google.com/spreadsheets/d/1zQcBMSFAtPdiuUIDFZfsb-U0uV1uEqdTVTCtIC4M8os/edit?usp=sharing)
 
-> ✅ Conforme especificado no desafio, todos os casos de teste foram organizados em planilha do Google Sheets com execução completa, resultados documentados e correlação com bugs identificados.
+> ✅ Conforme especificado no desafio, todos os casos de teste foram organizados em planilha do Google Sheets com execução completa, resultados documentados, correlação com bugs identificados e métricas automáticas funcionais.
 
 ### 📋 Estrutura da Planilha
 
